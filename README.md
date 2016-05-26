@@ -64,7 +64,7 @@ PGWireless Paygw Server SDK Library For PHP
             "0": {
                 "type": "vcs",
                 "url": "https://github.com/PGWireless/php-paygw-server-sdk"
-            }
+            },
             "packagist": {
                 "type": "composer",
                 "url": "https://packagist.phpcomposer.com"

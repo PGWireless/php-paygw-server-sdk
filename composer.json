@@ -11,7 +11,7 @@
   "homepage": "https://github.com/PGWireless/php-paygw-server-sdk",
   "autoload": {
     "psr-4": {
-      "PG\\paySDK": "src/"
+      "PG\\paySDK\\": "src/"
     }
   },
   "require": {
