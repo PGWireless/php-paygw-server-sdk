@@ -5,26 +5,69 @@ PGWireless Paygw Server SDK Library For PHP
 
 由于全平台的产品线丰富，各应用都有支付的需求，而支付涉及一系列敏感密钥和流程，如支付宝、微信密钥key，支付创建订单、退款、查询订单、转账、对账、财务统计等。为了统一管理支付的所有密钥，节约其他应用程序开发时间及成本，有必要在平台内建立和完善支付网关或者支付中心应用。
 
+## 安装INSTALL SDK
+
+### 编辑composer.json安装
+
+```javascript
+    {
+        "name": "项目名",
+        "description": "项目描述",
+        "keywords": [
+            "paygw"
+        ],
+        "homepage": "your homepage",
+        "type": "project",
+        "license": "BSD-3-Clause",
+        "minimum-stability": "stable",
+        "repositories": {
+            "0": {
+                "type": "vcs",
+                "url": "https://github.com/PGWireless/php-paygw-server-sdk"
+            }
+            "packagist": {
+                "type": "composer",
+                "url": "https://packagist.phpcomposer.com"
+            }
+        },
+        "require": {
+            "php": ">=5.4.0",
+            "PGWireless/php-paygw-server-sdk": "*",
+        },
+        "config": {
+            "process-timeout": 1800,
+            "vendor-dir": "../vendor/"
+        }
+    }
+```
+
+### 直接composer require
+
+    composer require "PGWireless/php-paygw-server-sdk:*"
+
 ## SDK快速开始
 
 ### 创建支付订单
 
-    $pay = new \PG\paySDK\Pay(12, 'sandbox', 'RSA私钥');
-    $payLoad = [
-        'biz_id'        => 1, // 商户ID
-        'way'           => 101, // 支付方式
-        'currency'      => 'CNY', // 货币类型
-        'out_trade_no'  => '2016052523310222327', // 商户订单号
-        'subject'       => 'Camera360商城订单', // 订单标题
-        'body'          => '超级可爱的大白', // 订单正文
-        'total_fee'     => 99900, // 总共的费用
-        'expire_second' => 3600, // 支付的有效时间
-        'user_id'       => '2323232', // 用户ID,可自定义,但不能为空
-        'user_name'     => '长风', // 用户名,可自定义,但不能为空
-        'client_ip'     => '129.33.56.21', // 用户支付的IP
-    ];
+```php
+<?php
+$pay = new \PG\paySDK\Pay(12, 'sandbox', 'RSA私钥');
+$payLoad = [
+    'biz_id'        => 1, // 商户ID
+    'way'           => 101, // 支付方式
+    'currency'      => 'CNY', // 货币类型
+    'out_trade_no'  => '2016052523310222327', // 商户订单号
+    'subject'       => 'Camera360商城订单', // 订单标题
+    'body'          => '超级可爱的大白', // 订单正文
+    'total_fee'     => 99900, // 总共的费用
+    'expire_second' => 3600, // 支付的有效时间
+    'user_id'       => '2323232', // 用户ID,可自定义,但不能为空
+    'user_name'     => '长风', // 用户名,可自定义,但不能为空
+    'client_ip'     => '129.33.56.21', // 用户支付的IP
+];
 
-    var_dump($pay->create($payLoad));
+var_dump($pay->create($payLoad));
+```
 
 输出:
 
@@ -61,6 +104,8 @@ PGWireless Paygw Server SDK Library For PHP
 
 ### 查询订单支付状态
 
+```php
+<?php
     $pay = new \PG\paySDK\Pay(12, 'sandbox', 'RSA私钥');
     $payLoad = [
         'way'           => 201, // 支付方式
@@ -68,6 +113,7 @@ PGWireless Paygw Server SDK Library For PHP
     ];
 
     var_dump($pay->query($payLoad));
+```
 
 输出:
 
@@ -161,6 +207,7 @@ JSON
 
 ### 支付宝钱包
 
+```javascript
     {
         // 支付服务标识
         "service": "mobile.securitypay.pay",
@@ -205,9 +252,11 @@ JSON
         // 商户公钥（和支付宝通信）
         "rsa_public_key": "xxx
     }
+```
 
 ### 微信钱包
 
+```javascript
     {
         // 微信应用ID
         "appid": "xxx",
@@ -244,9 +293,11 @@ JSON
         // 证书key更新时间
         "sslkeypathUpdateTime": 1447318251
     }
+```
 
 ### 支付宝wap支付
 
+```javascript
     {
         // 支付服务标识
         "service": "alipay.wap.create.direct.pay.by.user",
@@ -291,10 +342,11 @@ JSON
         // 商户公钥（和支付宝通信）
         "rsa_public_key": "xxx
     }
+```
 
 ### 微信公众号
 
-    <code javascript>
+```javascript
     {
         // 微信应用ID
         "appid": "xxx",
@@ -331,9 +383,11 @@ JSON
         // 证书key更新时间
         "sslkeypathUpdateTime": 1447318251
     }
+```
 
 ### Paypal
 
+```
     {
         // Client ID
         "client_id": "xxx",
@@ -372,9 +426,11 @@ JSON
         // 转账成功通知商户的超时时间
         "biz_notify_transfer_timeout": 10
     }
+```
 
 ### MOLPoints
 
+```javascript
     {
         // key
         "api_key": "d8504c29d81b0287",
@@ -409,9 +465,11 @@ JSON
         // 转账成功通知商户的超时时间
         "biz_notify_transfer_timeout": 10
     }
+```
 
 ### PAYSBUY
 
+```javascript
     {
         // key
         "api_key": "d8504c29d81b0287",
@@ -446,9 +504,11 @@ JSON
         // 转账成功通知商户的超时时间
         "biz_notify_transfer_timeout": 10
     }
+```
 
 ### 2c2p
 
+```javascript
     {
         // key
         "merchant_id": "xxxx",
@@ -489,6 +549,7 @@ JSON
         // 转账成功通知商户的超时时间
         "biz_notify_transfer_timeout": 10
     }
+```
 
 ## Camera360支付中心API
 
@@ -580,6 +641,7 @@ https://paygw.camera360.com/api/pay/create
 
 其中extra在支付方式为501（paypal）时，可以传递的值为：
 
+```php
     json_encode([
         'shipping_address' => [
             'country_code' => 'TH',
@@ -595,17 +657,17 @@ https://paygw.camera360.com/api/pay/create
         ],
         'web_profile_id' => 'XP-PVD8-TYED-4Z4K-JSHV',
     ]);
-
+```
 
 其中extra在支付方式为1001（2c2p）时，可以传递的值为：
 
-
+```php
     json_encode([
         'payment_option' => 'A',
         'language' => 'th',
         'pay_category_id' => 'mall',
     ]);
-
+```
 
 #### 返回
 
@@ -783,6 +845,7 @@ https://paygw.camera360.com/api/pay/query
 
 支付宝移动快捷支付（SDK）返回如：
 
+```javascript
     {
         "errno": 0,
         "message": "success",
@@ -806,13 +869,17 @@ https://paygw.camera360.com/api/pay/query
             }
         }
     }
+```
 
 请注意调起支付宝sdk时，需要拼接一次支付字符串即：
 
+```javascript
     json.data.sdk.order_info + '&sign="' + json.data.sdk.sign + '"&sign_type="RSA"'
+```
 
 微信SDK支付返回如：
 
+```javascript
     {
         "errno": 0,
         "message": "success",
@@ -840,9 +907,11 @@ https://paygw.camera360.com/api/pay/query
             }
         }
     }
+```
 
 支付宝手机网站wap支付返回如：
 
+```javascript
     {
         "errno": 0,
         "message": "success",
@@ -864,9 +933,11 @@ https://paygw.camera360.com/api/pay/query
             }
         }
     }
+```
 
 微信公众号返回如：
 
+```javascript
     {
         "errno": 0,
         "message": "success",
@@ -893,3 +964,4 @@ https://paygw.camera360.com/api/pay/query
             }
         }
     }
+```
