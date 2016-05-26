@@ -126,7 +126,8 @@ JSON
 
 #### 签名使用
 
-^应用场景^签名方^验签方^签名方式^待签名数据集^验证结果^签名数据^验签数据^
+|应用场景|签名方|验签方|签名方式|待签名数据集|验证结果|签名数据|验签数据|
+|---|---|---|---|---|---|---|---|
 |api/pay/create请求参数防伪|其他应用|paygw|RSA|请求的POST参数中除pp_sign和pp_sign_type之外的所有参数|pp_sign|其他应用私钥|其他应用公钥|
 |api/pay/create返回参数防伪|paygw|其他应用|RSA|返回数据中除pp_sign和pp_sign_type之外的所有参数|pp_sign|paygw支付私钥|paygw支付公钥|
 |api/pay/query请求参数防伪|其他应用|paygw|RSA|请求的POST参数中除pp_sign和pp_sign_type之外的所有参数|pp_sign|其他应用私钥|其他应用公钥|
