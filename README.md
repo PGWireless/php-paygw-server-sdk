@@ -72,7 +72,7 @@ PGWireless Paygw Server SDK Library For PHP
         },
         "require": {
             "php": ">=5.4.0",
-            "PGWireless/php-paygw-server-sdk": ">=1.0.2",
+            "PGWireless/php-paygw-server-sdk": ">=1.0.2"
         },
         "config": {
             "process-timeout": 1800,
