@@ -3,9 +3,43 @@ PGWireless Paygw Server SDK Library For PHP
 
 ## 目录
 -----
-1. [需求背景](##需求背景)
-1. [安装INSTALL SDK](##安装INSTALL SDK)
+1. [需求背景](#需求背景)
+1. [安装INSTALL SDK](#安装INSTALL SDK)
    * [编辑composer.json安装](#编辑composer.json安装)
+   * [直接composer require](#直接composer require)
+1. [SDK快速开始](#SDK快速开始)
+   * [创建支付订单](#创建支付订单)
+   * [查询订单支付状态](#查询订单支付状态)
+1. [Camera360支付中心流程](#Camera360支付中心流程)
+1. [系统交互](#系统交互)
+   * [协议](#协议)
+   * [数据格式](#数据格式)
+   * [签名](#签名)
+   * [协议](#协议)
+1. [生成公私钥](#生成公私钥)
+   * [安装openssl](#安装openssl)
+   * [生成RSA私钥](#生成RSA私钥)
+   * [生成RSA公钥](#生成RSA公钥)
+1. [支付渠道配置](#支付渠道配置)
+   * [支付宝钱包](#支付宝钱包)
+   * [微信钱包](#微信钱包)
+   * [支付宝wap支付](#支付宝wap支付)
+   * [微信公众号Native支付](#微信公众号Native支付)
+   * [MOLPoints](#MOLPoints)
+   * [PAYSBUY](#PAYSBUY)
+   * [2c2p](#2c2p)
+1. [Camera360支付中心API](#Camera360支付中心API)
+   * [支付方式（way）](#支付方式（way）)
+   * [货币类型（currency）](#货币类型（currency）)
+   * [商户（biz_id）](#商户（biz_id）)
+   * [支付订单状态（trade_status）](#支付订单状态（trade_status）)
+   * [退款订单状态（refund_status）](#退款订单状态（refund_status）)
+   * [创建支付订单](#创建支付订单)
+   * [支付异步通知](#支付异步通知)
+   * [退款](#退款)
+   * [退款异步通知](#退款异步通知)
+   * [查询订单支付情况](#查询订单支付情况)
+   * [支付接口返回示例](#支付接口返回示例)
 
 ## 需求背景
 
@@ -350,7 +384,7 @@ JSON
     }
 ```
 
-### 微信公众号
+### 微信公众号Native支付
 
 ```javascript
     {
