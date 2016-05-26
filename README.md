@@ -250,7 +250,7 @@ JSON
         // 商户私钥（和支付宝通信）
         "rsa_private_key": "xxx",
         // 商户公钥（和支付宝通信）
-        "rsa_public_key": "xxx
+        "rsa_public_key": "xxx"
     }
 ```
 
@@ -340,7 +340,7 @@ JSON
         // 商户私钥（和支付宝通信）
         "rsa_private_key": "xxx",
         // 商户公钥（和支付宝通信）
-        "rsa_public_key": "xxx
+        "rsa_public_key": "xxx"
     }
 ```
 
