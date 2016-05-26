@@ -1,6 +1,12 @@
 # Paygw Server SDK For PHP
 PGWireless Paygw Server SDK Library For PHP
 
+## 目录
+-----
+1. [需求背景](##需求背景)
+1. [安装INSTALL SDK](##安装INSTALL SDK)
+   * [编辑composer.json安装](#编辑composer.json安装)
+
 ## 需求背景
 
 由于全平台的产品线丰富，各应用都有支付的需求，而支付涉及一系列敏感密钥和流程，如支付宝、微信密钥key，支付创建订单、退款、查询订单、转账、对账、财务统计等。为了统一管理支付的所有密钥，节约其他应用程序开发时间及成本，有必要在平台内建立和完善支付网关或者支付中心应用。
