@@ -1,8 +1,10 @@
-# Paygw Server SDK For PHP
+# Camera360 Paygw Server SDK For PHP
 PGWireless Paygw Server SDK Library For PHP
 
+![Camera360 LOGO](./docs/camera360_LOGO.jpg "Camera360")
+
 ## 目录
------
+
 1. [需求背景](#需求背景)
 1. [安装INSTALL SDK](#安装install-sdk)
    * [编辑composer.json安装](#编辑composerjson安装)
@@ -40,6 +42,7 @@ PGWireless Paygw Server SDK Library For PHP
    * [退款异步通知](#退款异步通知)
    * [查询订单支付情况](#查询订单支付情况)
    * [支付接口返回示例](#支付接口返回示例)
+
 
 ## 需求背景
 
