@@ -10,8 +10,8 @@ PGWireless Paygw Server SDK Library For PHP
    * [编辑composer.json安装](#编辑composerjson安装)
    * [直接composer require](#直接composer-require)
 1. [SDK快速开始](#sdk快速开始)
-   * [创建支付订单](#创建支付订单)
-   * [查询订单支付状态](#查询订单支付状态)
+   * [创建支付订单示例](#创建支付订单示例)
+   * [查询订单支付状态示例](#查询订单支付状态示例)
 1. [Camera360支付中心流程](#camera360支付中心流程)
 1. [系统交互](#系统交互)
    * [协议](#协议)
@@ -90,7 +90,7 @@ PGWireless Paygw Server SDK Library For PHP
 
 ## SDK快速开始
 
-### 创建支付订单
+### 创建支付订单示例
 
 ```php
 <?php
@@ -145,7 +145,7 @@ var_dump($pay->create($payLoad));
       }
     }
 
-### 查询订单支付状态
+### 查询订单支付状态示例
 
 ```php
 <?php
