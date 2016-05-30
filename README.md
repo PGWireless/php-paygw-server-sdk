@@ -25,6 +25,7 @@ PGWireless Paygw Server SDK Library For PHP
    * [安装openssl](#安装openssl)
    * [生成RSA私钥](#生成rsa私钥)
    * [生成RSA公钥](#生成rsa公钥)
+1. [PHP语言签名示例代码](#PHP语言签名示例代码)
 1. [支付渠道配置](#支付渠道配置)
    * [支付宝钱包](#支付宝钱包)
    * [微信钱包](#微信钱包)
