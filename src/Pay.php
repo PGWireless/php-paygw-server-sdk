@@ -100,10 +100,6 @@ class Pay extends Base
 
     public function checkPayNecessaryParams($payLoad)
     {
-        if (empty($payLoad['currency'])) {
-            throw new Exception('缺少必要参数（currency）');
-        }
-
         if (empty($payLoad['subject'])) {
             throw new Exception('缺少必要参数（subject）');
         }
