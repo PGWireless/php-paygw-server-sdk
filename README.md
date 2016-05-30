@@ -12,6 +12,9 @@ PGWireless Paygw Server SDK Library For PHP
 1. [SDK快速开始](#sdk快速开始)
    * [创建支付订单示例](#创建支付订单示例)
    * [查询订单支付状态示例](#查询订单支付状态示例)
+   * [订单退款示例](#订单退款示例)
+   * [处理支付异步通知示例](#处理支付异步通知示例)
+   * [处理退款异步通知示例](#处理退款异步通知示例)
 1. [Camera360支付中心流程](#camera360支付中心流程)
 1. [系统交互](#系统交互)
    * [协议](#协议)
@@ -22,6 +25,7 @@ PGWireless Paygw Server SDK Library For PHP
    * [安装openssl](#安装openssl)
    * [生成RSA私钥](#生成rsa私钥)
    * [生成RSA公钥](#生成rsa公钥)
+1. [PHP语言签名示例代码](#PHP语言签名示例代码)
 1. [支付渠道配置](#支付渠道配置)
    * [支付宝钱包](#支付宝钱包)
    * [微信钱包](#微信钱包)
@@ -280,6 +284,66 @@ JSON
 ### 生成RSA公钥
 
     $ rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem
+
+## PHP语言签名示例代码
+
+```php
+<?php
+    /**
+     * 验证RSA签名（防伪）
+     *
+     * @param array $data 请求传递的数据
+     * @param string $paygwPublicKey Camera360支付网关公钥
+     * @return boolean
+     */
+    function verifyRSASign(array $data, $paygwPublicKey)
+    {
+        if (empty($data['pp_sign'])) {
+            return 0;
+        }
+
+        $sign = $data['pp_sign'];
+        unset($data['pp_sign']);
+        unset($data['pp_sign_type']);
+        ksort($data);
+
+        $message = '';
+        foreach ($data as $key => $value) {
+            $message .= $key . '=' . $value . '&';
+        }
+        $message     = substr($message, 0, -1);
+        $publicKeyId = openssl_pkey_get_public($paygwPublicKey);
+        $result      = openssl_verify($message, base64_decode($sign), $publicKeyId);
+        openssl_free_key($publicKeyId);
+
+        return $result;
+    }
+
+    /**
+     * RSA签名数据
+     *
+     * @param array $data 待签名数据
+     * @param string $bizPrivateKey 商户公钥
+     * @return string
+     */
+    function RSASign(array $data, $bizPrivateKey)
+    {
+        ksort($data);
+
+        $message = '';
+        foreach ($data as $key => $value) {
+            $message .= $key . '=' . $value . '&';
+        }
+
+        $message      = substr($message, 0, -1);
+        $privateKeyId = openssl_pkey_get_private($bizPrivateKey);
+        $signature    = '';
+        openssl_sign($message, $signature, $privateKeyId);
+        openssl_free_key($privateKeyId);
+
+        return base64_encode($signature);
+    }
+```
 
 ## 支付渠道配置
 
