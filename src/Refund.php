@@ -13,10 +13,10 @@ use Exception;
 /**
  * 支付接口类
  *
- * Class Fefund
+ * Class Refund
  * @package \PG\paySDK
  */
-class Fefund extends Base
+class Refund extends Base
 {
     /**
      * 构造方法
