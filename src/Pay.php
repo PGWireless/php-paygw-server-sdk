@@ -56,16 +56,17 @@ class Pay extends Base
     {
         $payLoad['biz_id'] = $this->bizId;
         $this->checkNecessaryParams($payLoad);
+        $this->checkPayNecessaryParams($payLoad);
 
         // 微信公众号传递openid
-        if ($payLoad['way'] == WAY_WEICHAT_WP) {
+        if ($payLoad['way'] == C360_PAY_SDK_WAY_WEICHAT_WP) {
             if (empty($payLoad['openid'])) {
                 throw new Exception('微信公众号支付必须先获取微信用户的openid');
             }
         }
 
         $pay = $this->callApi(self::PAYGW_API_PAY_CREATE, $payLoad, $timeout);
-        if ($pay['data']['trade']['way'] == WAY_ALIPAY_APP_SDK) {
+        if ($pay['data']['trade']['way'] == C360_PAY_SDK_WAY_ALIPAY_APP_SDK) {
             $pay['data']['sdk']['order_info'] = $pay['data']['sdk']['order_info'] . '&sign="' . $pay['data']['sdk']['sign'] . '"&sign_type="' . $pay['data']['sdk']['sign_type'] . '"';
             unset($pay['data']['sdk']['sign']);
             unset($pay['data']['sdk']['sign_type']);
@@ -95,5 +96,38 @@ class Pay extends Base
         $query = $this->callApi(self::PAYGW_API_PAY_QUERY, $payLoad, $timeout);
 
         return $query['data'];
+    }
+
+    public function checkPayNecessaryParams($payLoad)
+    {
+        if (empty($payLoad['currency'])) {
+            throw new Exception('缺少必要参数（currency）');
+        }
+
+        if (empty($payLoad['subject'])) {
+            throw new Exception('缺少必要参数（subject）');
+        }
+
+        if (empty($payLoad['body'])) {
+            throw new Exception('缺少必要参数（body）');
+        }
+
+        if (empty($payLoad['total_fee'])) {
+            throw new Exception('缺少必要参数（total_fee）');
+        }
+
+        if (empty($payLoad['user_id'])) {
+            throw new Exception('缺少必要参数（user_id）');
+        }
+
+        if (empty($payLoad['user_name'])) {
+            throw new Exception('缺少必要参数（user_name）');
+        }
+
+        if (empty($payLoad['client_ip'])) {
+            throw new Exception('缺少必要参数（client_ip）');
+        }
+
+        return true;
     }
 }

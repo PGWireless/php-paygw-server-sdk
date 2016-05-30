@@ -7,6 +7,9 @@
 namespace PG\paySDK\test;
 
 use PG\paySDK\http\Client;
+use PG\paySDK\http\ClientError;
+use PG\paySDK\http\ServerError;
+use PG\paySDK\http\NetworkError;
 
 class ClientTest extends HttpTestCase
 {
@@ -21,7 +24,7 @@ class ClientTest extends HttpTestCase
 
     public function testPostRequest()
     {
-        $client = new Net_Http_Client();
+        $client = new Client();
         $client->post(self::HOST.'/basic/post', array("greeting"=>"Hello", "from"=>"Net_Http_Client"));
         $this->assertEquals(200, $client->getStatus());
         $this->assertContains("Hello back", $client->getBody());
@@ -29,7 +32,7 @@ class ClientTest extends HttpTestCase
 
     public function testHeadRequestWithSetHeader()
     {
-        $client = new Net_Http_Client();
+        $client = new Client();
         $client->setHeader('X-Requested-Square', 4);
         $client->head(self::HOST.'/basic/head');
         $this->assertEquals(200, $client->getStatus());
@@ -54,7 +57,7 @@ class ClientTest extends HttpTestCase
 
     public function testBasicAuthenticationOnMultipleRequests()
     {
-        $client = new Net_Http_Client();
+        $client = new Client();
 
         $client->get(self::HOST.'/basic/auth/basic');
         $this->assertEquals(401, $client->getStatus());
@@ -73,7 +76,7 @@ class ClientTest extends HttpTestCase
 
     public function testNotFoundError()
     {
-        $client = new Net_Http_Client();
+        $client = new Client();
         $client->get(self::HOST.'/basic/errors/missing');
         $this->assertEquals(404, $client->getStatus());
         $this->assertContains('Resource Not Found', $client->getBody());
@@ -81,7 +84,7 @@ class ClientTest extends HttpTestCase
 
     public function testInternalServerError()
     {
-        $client = new Net_Http_Client();
+        $client = new Client();
         $client->get(self::HOST.'/basic/errors/crash');
         $this->assertEquals(500, $client->getStatus());
         $this->assertContains('The Server Exploded', $client->getBody());
@@ -89,12 +92,12 @@ class ClientTest extends HttpTestCase
 
     public function testFailOnNetworkTimeout()
     {
-        $client = new Net_Http_Client();
+        $client = new Client();
         $client->setTimeout(1);
 
         try {
             $client->get(self::HOST.'/basic/errors/timeout');
-        } catch(Net_Http_NetworkError $e) {
+        } catch(NetworkError $e) {
             $this->assertContains("timed out", $e->getMessage());
             $this->assertEquals(28, $e->getCode());
         }
@@ -102,12 +105,12 @@ class ClientTest extends HttpTestCase
 
     public function testFailOnErrorThrowsExceptionFromClientError()
     {
-        $client = new Net_Http_Client();
+        $client = new Client();
         $client->failOnError();
 
         try {
             $client->get(self::HOST.'/basic/errors/missing');
-        } catch(Net_Http_ClientError $e) {
+        } catch(ClientError $e) {
             $this->assertContains('Not Found', $e->getMessage());
             $this->assertEquals(404, $e->getCode());
             $this->assertEquals(404, $e->getResponse()->getStatus());
@@ -117,12 +120,12 @@ class ClientTest extends HttpTestCase
 
     public function testFailOnErrorThrowsExceptionFromServerError()
     {
-        $client = new Net_Http_Client();
+        $client = new Client();
         $client->failOnError();
 
         try {
             $client->get(self::HOST.'/basic/errors/crash');
-        } catch(Net_Http_ServerError $e) {
+        } catch(ServerError $e) {
             $this->assertContains('Internal Server Error', $e->getMessage());
             $this->assertEquals(500, $e->getCode());
             $this->assertEquals(500, $e->getResponse()->getStatus());

@@ -78,10 +78,43 @@ class Notify extends Base
      */
     public function isPaySuccess($notifyMessage = [])
     {
-        if (!empty($payLoad)) {
+        if (!empty($notifyMessage)) {
             $this->setNotifyMessage($notifyMessage);
         }
 
-        return $this->notifyMessage['trade_status'] == TRADE_STATUS_SUCCESS;
+        return (isset($this->notifyMessage['trade_status']) &&
+            $this->notifyMessage['trade_status'] == C360_PAY_SDK_TRADE_STATUS_SUCCESS);
+    }
+
+    /**
+     * 判断是否已处理退款
+     *
+     * @param array $notifyMessage 支付异步通知参数
+     * @return bool
+     */
+    public function isRefundHandled($notifyMessage = [])
+    {
+        if (!empty($notifyMessage)) {
+            $this->setNotifyMessage($notifyMessage);
+        }
+
+        return (isset($this->notifyMessage['refund_status']) &&
+            $this->notifyMessage['refund_status'] == C360_PAY_SDK_REFUND_STATUS_WAITING);
+    }
+
+    /**
+     * 判断是否退款成功
+     *
+     * @param array $notifyMessage 支付异步通知参数
+     * @return bool
+     */
+    public function isRefundSuccess($notifyMessage = [])
+    {
+        if (!empty($notifyMessage)) {
+            $this->setNotifyMessage($notifyMessage);
+        }
+
+        return (isset($this->notifyMessage['refund_status']) &&
+            $this->notifyMessage['refund_status'] == C360_PAY_SDK_REFUND_STATUS_SUCCESS);
     }
 }
