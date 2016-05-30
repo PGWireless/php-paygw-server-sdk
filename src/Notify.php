@@ -28,16 +28,15 @@ class Notify extends Base
      *
      * @param string $bizId 商户ID
      * @param string $mode 访问环境
-     * @param array $notifyMessage 异步通知参数
      * @param string $privateKey 商户私钥
+     * @param array $notifyMessage 异步通知参数
      * @param string $publicKey 商户公钥
      */
-    public function __construct($bizId = '', $mode = 'live', $notifyMessage = [], $privateKey = '', $publicKey = '')
+    public function __construct($bizId = '', $mode = 'live', $privateKey = '', $notifyMessage = [], $publicKey = '')
     {
         if (!empty($notifyMessage)) {
             $this->setNotifyMessage($notifyMessage);
         }
-        $this->notifyMessage = $notifyMessage;
         parent::__construct($bizId, $mode, $privateKey, $publicKey);
     }
 
@@ -78,10 +77,43 @@ class Notify extends Base
      */
     public function isPaySuccess($notifyMessage = [])
     {
-        if (!empty($payLoad)) {
+        if (!empty($notifyMessage)) {
             $this->setNotifyMessage($notifyMessage);
         }
 
-        return $this->notifyMessage['trade_status'] == TRADE_STATUS_SUCCESS;
+        return (isset($this->notifyMessage['trade_status']) &&
+            $this->notifyMessage['trade_status'] == C360_PAY_SDK_TRADE_STATUS_SUCCESS);
+    }
+
+    /**
+     * 判断是否已处理退款
+     *
+     * @param array $notifyMessage 支付异步通知参数
+     * @return bool
+     */
+    public function isRefundHandled($notifyMessage = [])
+    {
+        if (!empty($notifyMessage)) {
+            $this->setNotifyMessage($notifyMessage);
+        }
+
+        return (isset($this->notifyMessage['refund_status']) &&
+            $this->notifyMessage['refund_status'] == C360_PAY_SDK_REFUND_STATUS_WAITING);
+    }
+
+    /**
+     * 判断是否退款成功
+     *
+     * @param array $notifyMessage 支付异步通知参数
+     * @return bool
+     */
+    public function isRefundSuccess($notifyMessage = [])
+    {
+        if (!empty($notifyMessage)) {
+            $this->setNotifyMessage($notifyMessage);
+        }
+
+        return (isset($this->notifyMessage['refund_status']) &&
+            $this->notifyMessage['refund_status'] == C360_PAY_SDK_REFUND_STATUS_SUCCESS);
     }
 }

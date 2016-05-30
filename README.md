@@ -75,12 +75,9 @@ PGWireless Paygw Server SDK Library For PHP
         },
         "require": {
             "php": ">=5.4.0",
-            "PGWireless/php-paygw-server-sdk": ">=1.0.2"
-        },
-        "config": {
-            "process-timeout": 1800,
-            "vendor-dir": "../vendor/"
+            "PGWireless/php-paygw-server-sdk": ">=1.0.3"
         }
+        // ...
     }
 ```
 
@@ -182,6 +179,44 @@ var_dump($pay->create($payLoad));
       ["pp_sign_type"]=>
       string(3) "RSA"
     }
+
+### 订单退款示例
+
+```php
+<?php
+    $refund = new \PG\paySDK\Refund(12, 'sandbox', 'RSA私钥');
+    $post = [
+        'way'           => '101',
+        'out_trade_no'  => '20160406145992887952699803',
+        'out_refund_no' => '30160406145992887952699804',
+        'reason'        => '颜色款式不喜欢',
+        'total_fee'     => 100,
+        'refund_fee'    => 80,
+        'user_id'       => '2323232',
+        'user_name'     => '长风',
+    ];
+
+    $refundParams = $refund->create($post);
+    var_dump($refundParams);
+```
+
+### 处理支付异步通知示例
+
+```php
+<?php
+    $notify = new \PG\paySDK\Notify(12, 'sandbox', 'RSA私钥');
+    $notify->setNotifyMessage($_POST);
+    var_dump($notify->isPaySuccess());
+```
+
+### 处理退款异步通知示例
+
+```php
+<?php
+    $notify = new \PG\paySDK\Notify(12, 'sandbox', 'RSA私钥');
+    $notify->setNotifyMessage($_POST);
+    var_dump($notify->isRefundSuccess());
+```
 
 ## Camera360支付中心流程
 
