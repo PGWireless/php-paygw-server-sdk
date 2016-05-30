@@ -31,6 +31,7 @@ PGWireless Paygw Server SDK Library For PHP
    * [微信钱包](#微信钱包)
    * [支付宝wap支付](#支付宝wap支付)
    * [微信公众号Native支付](#微信公众号native支付)
+   * [paypal](#paypal)
    * [MOLPoints](#molpoints)
    * [PAYSBUY](#paysbuy)
    * [2c2p](#2c2p)
