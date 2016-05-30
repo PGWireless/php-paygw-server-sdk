@@ -536,7 +536,7 @@ DOONqlWXtDa7Uzf5G4dRqa+ZhUOofb4mGF/aR4ucyXVY4IXm6+cmDbrTxoeyc71a
         $payLoad['pp_sign']     = $this->RSASign($payLoad);
         $payLoad['pp_sign_type'] = 'RSA';
 
-        $client = new Http\Client();
+        $client = new http\Client();
         $client->setTimeout($timeout);
         $client->post($this->getApiUrl($api), $payLoad);
 
