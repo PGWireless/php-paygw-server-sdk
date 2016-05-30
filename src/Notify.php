@@ -28,16 +28,15 @@ class Notify extends Base
      *
      * @param string $bizId 商户ID
      * @param string $mode 访问环境
-     * @param array $notifyMessage 异步通知参数
      * @param string $privateKey 商户私钥
+     * @param array $notifyMessage 异步通知参数
      * @param string $publicKey 商户公钥
      */
-    public function __construct($bizId = '', $mode = 'live', $notifyMessage = [], $privateKey = '', $publicKey = '')
+    public function __construct($bizId = '', $mode = 'live', $privateKey = '', $notifyMessage = [], $publicKey = '')
     {
         if (!empty($notifyMessage)) {
             $this->setNotifyMessage($notifyMessage);
         }
-        $this->notifyMessage = $notifyMessage;
         parent::__construct($bizId, $mode, $privateKey, $publicKey);
     }
 
