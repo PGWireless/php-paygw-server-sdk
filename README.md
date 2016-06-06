@@ -15,7 +15,7 @@ PGWireless Paygw Server SDK Library For PHP
    * [订单退款示例](#订单退款示例)
    * [处理支付异步通知示例](#处理支付异步通知示例)
    * [处理退款异步通知示例](#处理退款异步通知示例)
-1. [Camera360支付中心流程](#camera360支付中心流程)
+1. [整合Camera360支付交易流程](#整合camera360支付交易流程)
 1. [app-server和paygw系统交互](#app-server和paygw系统交互)
    * [协议](#协议)
    * [数据格式](#数据格式)
@@ -214,9 +214,31 @@ var_dump($pay->create($payLoad));
     var_dump($notify->isRefundSuccess());
 ```
 
-## Camera360支付中心流程
+## 整合Camera360支付交易流程
 
-![Camera360支付中心流程](./docs/支付中心.jpg "Camera360支付中心流程")
+![整合Camera360支付交易流程](./docs/app-pay-sdk.svg "整合Camera360支付交易流程")
+
+### 角色说明
+
+**app**
+
+业务产品客户端,是指待整合Camera360支付中心的产品app客户端
+
+**app server**
+
+业务产品服务器端,是指待整合Camera360支付中心的产品server端
+
+**paygw**
+
+Camera360支付中心服务器端
+
+**app pay sdk**
+
+Camera360支付中心客户端SDK,包括安卓和IOS
+
+**支付渠道**
+
+Camera360支付中心所支持的所有第三方支付渠道
 
 ## app-server和paygw系统交互
 
