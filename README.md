@@ -216,7 +216,7 @@ var_dump($pay->create($payLoad));
 
 ## 整合Camera360支付交易流程
 
-![Camera360支付中心流程](./docs/app-pay-sdk.svg "整合Camera360支付交易流程")
+![整合Camera360支付交易流程](./docs/app-pay-sdk.svg "整合Camera360支付交易流程")
 
 ### 角色说明
 
