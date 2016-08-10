@@ -395,6 +395,12 @@ DOONqlWXtDa7Uzf5G4dRqa+ZhUOofb4mGF/aR4ucyXVY4IXm6+cmDbrTxoeyc71a
     const PAYGW_API_REFUND_CREATE = 'api/refund/create';
 
     /**
+     * 商户查询订单接口ID
+     */
+
+    const PAYGW_API_ORDER_LIST = 'api/biz/order-list';
+
+    /**
      * 支付网关生产环境
      */
     const LIVE = 'https://paygw.camera360.com/';
@@ -533,7 +539,7 @@ DOONqlWXtDa7Uzf5G4dRqa+ZhUOofb4mGF/aR4ucyXVY4IXm6+cmDbrTxoeyc71a
      */
     public function callApi($api, $payLoad, $timeout = 10)
     {
-        $payLoad['pp_sign']     = $this->RSASign($payLoad);
+        $payLoad['pp_sign']      = $this->RSASign($payLoad);
         $payLoad['pp_sign_type'] = 'RSA';
 
         $client = new http\Client();
@@ -587,6 +593,9 @@ DOONqlWXtDa7Uzf5G4dRqa+ZhUOofb4mGF/aR4ucyXVY4IXm6+cmDbrTxoeyc71a
 
         $message = '';
         foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $value = json_encode($value);
+            }
             $message .= $key . '=' . $value . '&';
         }
         $message     = substr($message, 0, -1);
@@ -609,6 +618,9 @@ DOONqlWXtDa7Uzf5G4dRqa+ZhUOofb4mGF/aR4ucyXVY4IXm6+cmDbrTxoeyc71a
 
         $message = '';
         foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $value = json_encode($value);
+            }
             $message .= $key . '=' . $value . '&';
         }
 
