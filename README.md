@@ -214,6 +214,63 @@ var_dump($pay->create($payLoad));
     var_dump($notify->isRefundSuccess());
 ```
 
+### 商户订单列表示例
+
+```php
+<?php
+    $pay = new \PG\paySDK\Pay(12, 'sandbox', 'RSA私钥');
+    $payLoad = [
+        'user_id' => 'xxxx', // 用户ID
+        'num'     => 2, // 注意默认为20条
+    ];
+
+    var_dump($pay->lists($payLoad));
+```
+
+输出:
+```
+{
+    "errno": 0,
+    "message": "success",
+    "data": {
+        "list": [
+            {
+                "biz_id": "12",
+                "way": 103,
+                "out_trade_no": "146470730945898007",
+                "subject": "Camera360的心意",
+                "body": "Camera360支付中心",
+                "currency": "CNY",
+                "trade_no": null,
+                "pay_time": null,
+                "total_fee": "1",
+                "trade_status": 101,
+                "user_id": "12",
+                "user_name": "12"
+            },
+            {
+                "biz_id": "12",
+                "way": 103,
+                "out_trade_no": "146470728594944092",
+                "subject": "Camera360的心意",
+                "body": "Camera360支付中心",
+                "currency": "CNY",
+                "trade_no": null,
+                "pay_time": null,
+                "total_fee": "1",
+                "trade_status": 101,
+                "user_id": "12",
+                "user_name": "12"
+            }
+        ],
+        "page": 1,
+        "num": 20,
+        "total": "386",
+        "pp_sign": "Rt6gXg8WRyKALW75TLgdkJvd6pndc9Mk5P7Rv3F6CpODkEK5UHqS0eZr49UXzZI2GdUdTbuTKxxDoeifnC3GxkP9nKKpjUZjmhPFUDEfussExrZmg60MYbScF65VOCweWZKgaHw0caPWd84+Dna4sbiMbDw2QwybJHZa12QxFlk=",
+        "pp_sign_type": "RSA"
+    }
+}
+```
 ## 整合Camera360支付交易流程
 
 ![整合Camera360支付交易流程](./docs/app-pay-sdk.jpg "整合Camera360支付交易流程")
