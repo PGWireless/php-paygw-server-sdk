@@ -98,6 +98,14 @@ class Pay extends Base
         return $query['data'];
     }
 
+    public function lists(array $conditions, $timeout = 10)
+    {
+        $conditions['biz_id'] = $this->bizId;
+        $bizOrderLists = $this->callApi(self::PAYGW_API_ORDER_LIST, $conditions, $timeout);
+
+        return $bizOrderLists['data'];
+    }
+
     public function checkPayNecessaryParams($payLoad)
     {
         if (empty($payLoad['subject'])) {
