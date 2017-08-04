@@ -535,6 +535,37 @@ https://paygw.camera360.com/api/pay/create
     ]);
 ```
 
+其中extra在支付方式为301（MOLPOINTS）时，可以传递的值为：
+
+```php
+    json_encode([
+        'channel' => '12call', 
+    ]);
+```
+
+channel可选项为：
+
+Payment channel: 
+
+1. Cash Card
+
+  * 12call     :AIS 12call Card
+  * truemoney  :Truemoney Card
+  * dtachappy  :Dtac Cash Card 
+  * molpoints  :MOLPoints Card
+
+2. EQwallet
+
+  * mpay       :mPAY wallet
+  * linepay    :LINE Pay
+  * truewallet :Wallet by TrueMoney
+
+3. Operator Billing
+
+  * psms : Premium SMS
+
+注意：The PIN or Serial on cash card will represent the price point. You do not need to pass value of parameters "for" and "price". So, the parameters "for" and "price" will be optional for channel=12call|truemoney|dtachappy|molpoints.
+
 #### 返回
 
 |字段|含义|说明|类型|是否为空|默认|
